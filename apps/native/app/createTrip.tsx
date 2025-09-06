@@ -1,11 +1,13 @@
-import { Text, View, StyleSheet, SafeAreaView, TouchableOpacity, TextInput, ScrollView } from "react-native";
-import { backgroundColorDark, foregroundColorDark, backgroundColorLight } from "@repo/ui/appColors";
+import { Text, View, StyleSheet, SafeAreaView, TextInput, ScrollView, ActivityIndicator } from "react-native";
+import { primaryColorLight, backgroundColorDark, foregroundColorDark, backgroundColorLight } from "@repo/ui/appColors";
 import { router, useLocalSearchParams } from "expo-router";
-import { Ionicons } from '@expo/vector-icons';
 import { revalidateLogic, useForm } from '@tanstack/react-form';
 import { z } from 'zod';
+import { useEffect } from 'react';
 import { PrimaryButton } from "@repo/ui/primaryButton.native";
 import { CitySelector, DateSelector, TimeSelector } from '../components/createTrip';
+import { useTrip, useCreateTrip, useUpdateTrip } from '../src/apis/trips';
+import { AppHeader } from '../components/shared';
 
 const tripSchema = z.object({
   departure: z.string().min(1, 'Departure city is required'),
@@ -22,6 +24,12 @@ type TripFormData = z.infer<typeof tripSchema>;
 export default function CreateTrip() {
   const params = useLocalSearchParams();
   const isEditMode = !!params.tripId;
+  const tripId = params.tripId as string;
+
+  // React Query hooks
+  const { data: existingTrip, isLoading } = useTrip(tripId);
+  const createTrip = useCreateTrip();
+  const updateTrip = useUpdateTrip();
 
   const form = useForm({
     defaultValues: {
@@ -38,33 +46,48 @@ export default function CreateTrip() {
       onDynamic: tripSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log('Form submitted:', value);
-      console.log('Trip ID:', params.tripId);
-      if (isEditMode) {
-        // Update existing trip with params.tripId
-      } else {
-        // Create new trip
+      try {
+        if (isEditMode) {
+          await updateTrip.mutateAsync({ id: tripId, trip: value });
+        } else {
+          await createTrip.mutateAsync(value);
+        }
+        router.back();
+      } catch (error) {
+        console.error('Error saving trip:', error);
       }
-      router.back();
     },
   });
+
+  // Load existing trip data when available
+  useEffect(() => {
+    if (isEditMode && existingTrip) {
+      form.setFieldValue('departure', existingTrip.departure || '');
+      form.setFieldValue('arrival', existingTrip.arrival || '');
+      form.setFieldValue('departureDate', existingTrip.departureDate || '');
+      form.setFieldValue('departureTime', existingTrip.departureTime || '');
+      form.setFieldValue('arrivalDate', existingTrip.arrivalDate || '');
+      form.setFieldValue('arrivalTime', existingTrip.arrivalTime || '');
+      form.setFieldValue('notes', existingTrip.notes || '');
+    }
+  }, [existingTrip, isEditMode]);
+
+  if (isEditMode && isLoading) {
+    return (
+      <View style={[styles.outerContainer, styles.centerContent]}>
+        <ActivityIndicator size="large" color={primaryColorLight} />
+        <Text style={styles.loadingText}>Loading trip...</Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.outerContainer}>
       <SafeAreaView style={styles.container}>
         {/* Header */}
-        <View style={styles.header}>
-          <TouchableOpacity 
-            style={styles.backButton}
-            onPress={() => router.back()}
-          >
-            <Ionicons name="arrow-back" size={24} color={foregroundColorDark} />
-          </TouchableOpacity>
-          <Text style={styles.headerTitle}>
-            {isEditMode ? 'Edit flight information' : 'Add new trip'}
-          </Text>
-          <View style={styles.headerRight} />
-        </View>
+        <AppHeader 
+          title={isEditMode ? 'Edit flight information' : 'Add new trip'}
+        />
 
         {/* Main Content Container */}
         <View style={styles.contentContainer}>
@@ -73,10 +96,10 @@ export default function CreateTrip() {
             {/* Departure City */}
             <form.Field
               name="departure"
-                validators={{
+              validators={{
                 onChange: ({ value }) => {
-                    const result = tripSchema.shape.departure.safeParse(value);
-                    return result.success ? undefined : result.error.issues[0]?.message;
+                  const result = tripSchema.shape.departure.safeParse(value);
+                  return result.success ? undefined : result.error.issues[0]?.message;
                 },
               }}
             >
@@ -231,10 +254,14 @@ export default function CreateTrip() {
             >
               {([_, isSubmitting, isValid]) => (
                 <PrimaryButton
-                  title={isSubmitting ? "Saving..." : "Save changes"}
+                  title={
+                    createTrip.isPending || updateTrip.isPending
+                      ? "Saving..." 
+                      : (isEditMode ? "Update trip" : "Save changes")
+                  }
                   dark={true}
                   onPress={form.handleSubmit}
-                  disabled={isSubmitting || !isValid}
+                  disabled={isSubmitting || !isValid || createTrip.isPending || updateTrip.isPending}
                   style={styles.saveButton}
                 />
               )}
@@ -254,30 +281,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: backgroundColorDark,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 24,
-    paddingVertical: 16,
-    marginTop: 8,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    color: foregroundColorDark,
-  },
-  headerTitle: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: foregroundColorDark,
-    textAlign: 'center',
-  },
-  headerRight: {
-    width: 40,
   },
   contentContainer: {
     flex: 1,
@@ -329,5 +332,14 @@ const styles = StyleSheet.create({
   saveButton: {
     borderRadius: 25,
     width: '100%',
+  },
+  centerContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: foregroundColorDark,
   },
 });
