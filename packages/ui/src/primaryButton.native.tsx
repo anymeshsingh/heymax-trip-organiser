@@ -5,10 +5,11 @@ interface PrimaryButtonProps {
   title: string;
   style?: StyleProp<ViewStyle>,
   onPress: (event: GestureResponderEvent) => void
-  dark: boolean
+  dark?: boolean
+  disabled?: boolean
 }
 
-export const PrimaryButton = ({ title, style, onPress, dark = false }: PrimaryButtonProps) => {
+export const PrimaryButton = ({ title, style, onPress, dark = false, disabled = false }: PrimaryButtonProps) => {
   return (
     <TouchableOpacity 
       style={[
@@ -17,6 +18,7 @@ export const PrimaryButton = ({ title, style, onPress, dark = false }: PrimaryBu
         style,
       ]} 
       onPress={onPress}
+      disabled={disabled}
     >
       <Text style={styles.buttonText}>{title}</Text>
     </TouchableOpacity>
