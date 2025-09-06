@@ -1,6 +1,7 @@
 import { Text, View, Image, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { PrimaryButton } from "@repo/ui/primaryButton.native"
 import { primaryColorDark, backgroundColorDark, foregroundColorDark, primaryColorLight } from "@repo/ui/appColors"
+import { router } from "expo-router";
 
 export default function Index() {
   return (
@@ -96,7 +97,7 @@ export default function Index() {
         <PrimaryButton
           title="Next"
           dark={true}
-          onPress={() => console.log("Button Pressed")}
+          onPress={() => router.push('/prompt')}
           style={styles.nextButton}
         />
       </View>
