@@ -1,6 +1,6 @@
 import { Text, View, Image, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { PrimaryButton } from "@repo/ui/primaryButton.native"
-import { primaryColorDark, backgroundColorDark, foregroundColorDark, primaryColorLight } from "@repo/ui/appColors"
+import { backgroundColorDark, foregroundColorDark } from "@repo/ui/appColors"
 import { router } from "expo-router";
 
 export default function Prompt() {
@@ -36,7 +36,7 @@ export default function Prompt() {
           title="Let's go!"
           dark={true}
           onPress={() => {
-            router.back();
+            router.push("/myTrips");
           }}
           style={styles.letsGoButton}
         />
