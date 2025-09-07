@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
-import { primaryColorLight } from '@repo/ui/appColors';
+import { primaryColorLight, secondaryForegroundColor } from '@repo/ui/appColors';
 
 interface TabNavigationProps {
   activeTab: string;
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   inactiveTabText: {
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     fontSize: 16,
     fontWeight: '500',
   },

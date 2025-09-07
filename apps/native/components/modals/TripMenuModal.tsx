@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { errorForegroundColor, foregroundColorLight, tertiaryForegroundColor } from '@repo/ui/appColors';
 
 interface TripMenuModalProps {
   visible: boolean;
@@ -43,7 +44,7 @@ export const TripMenuModal: React.FC<TripMenuModalProps> = ({
             <View style={styles.content}>
               <TouchableOpacity style={styles.menuItem} onPress={handleEdit}>
                 <View style={styles.menuItemLeft}>
-                  <Ionicons name="create-outline" size={24} color="#1F2937" />
+                  <Ionicons name="create-outline" size={24} color={foregroundColorLight} />
                   <Text style={styles.menuItemText}>Edit trip information</Text>
                 </View>
               </TouchableOpacity>
@@ -52,7 +53,7 @@ export const TripMenuModal: React.FC<TripMenuModalProps> = ({
               
               <TouchableOpacity style={styles.menuItem} onPress={handleDelete}>
                 <View style={styles.menuItemLeft}>
-                  <Ionicons name="trash-outline" size={24} color="#EF4444" />
+                  <Ionicons name="trash-outline" size={24} color={errorForegroundColor} />
                   <Text style={[styles.menuItemText, styles.deleteText]}>Delete</Text>
                 </View>
               </TouchableOpacity>
@@ -92,16 +93,16 @@ const styles = StyleSheet.create({
   },
   menuItemText: {
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     marginLeft: 16,
     fontWeight: '500',
   },
   deleteText: {
-    color: '#EF4444',
+    color: errorForegroundColor,
   },
   separator: {
     height: 1,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: tertiaryForegroundColor,
     marginVertical: 8,
   },
 });

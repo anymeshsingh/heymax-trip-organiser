@@ -4,3 +4,7 @@ export const foregroundColorDark = "#FFFFFF";
 export const foregroundColorLight = "#1A1A1A";
 export const primaryColorDark = "#802EFF";
 export const primaryColorLight = "#5046C5";
+export const secondaryForegroundColor = "#9CA3AF";
+export const tertiaryForegroundColor = "#E5E7EB";
+export const errorForegroundColor = "#DB4C40";
+export const errorBackgroundColor = "#FBEDEC";

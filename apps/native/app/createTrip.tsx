@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, SafeAreaView, TextInput, ScrollView, ActivityIndicator } from "react-native";
-import { primaryColorLight, backgroundColorDark, foregroundColorDark, backgroundColorLight } from "@repo/ui/appColors";
+import { primaryColorLight, backgroundColorDark, foregroundColorDark, backgroundColorLight, secondaryForegroundColor, foregroundColorLight, tertiaryForegroundColor } from "@repo/ui/appColors";
 import { router, useLocalSearchParams } from "expo-router";
 import { revalidateLogic, useForm } from '@tanstack/react-form';
 import { z } from 'zod';
@@ -232,7 +232,7 @@ export default function CreateTrip() {
                         <TextInput
                           style={styles.notesInput}
                           placeholder="Write your notes here..."
-                          placeholderTextColor="#9CA3AF"
+                          placeholderTextColor={secondaryForegroundColor}
                           multiline
                           numberOfLines={6}
                           value={field.state.value}
@@ -301,7 +301,7 @@ const styles = StyleSheet.create({
   },
   fieldLabel: {
     fontSize: 16,
-    color: '#6B7280',
+    color: foregroundColorLight,
     marginBottom: 8,
     fontWeight: '500',
   },
@@ -315,14 +315,14 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   notesInput: {
-    backgroundColor: '#F9FAFB',
+    backgroundColor: foregroundColorDark,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: tertiaryForegroundColor,
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     minHeight: 120,
   },
   bottomSection: {

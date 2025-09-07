@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, Platform, StyleSheet } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { primaryColorDark } from '@repo/ui/appColors';
+import { foregroundColorLight, primaryColorDark, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 
 interface TimePickerModalProps {
   visible: boolean;
@@ -77,12 +77,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: tertiaryForegroundColor,
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
   },
   modalActionButton: {
     paddingHorizontal: 16,
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
   },
   modalCancelText: {
     fontSize: 16,
-    color: '#6B7280',
+    color: secondaryForegroundColor,
     fontWeight: '500',
   },
   modalSelectText: {

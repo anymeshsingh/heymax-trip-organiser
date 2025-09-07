@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import { primaryColorDark, primaryColorLight } from '@repo/ui/appColors';
+import { foregroundColorDark, foregroundColorLight, primaryColorLight, secondaryForegroundColor } from '@repo/ui/appColors';
 import { TermsModal } from '../modals/TermsModal';
 
 export const AdvertisementCard: React.FC = () => {
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     borderRadius: 20,
     marginRight: 8,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: foregroundColorDark,
   },
   activeTab: {
     backgroundColor: primaryColorLight,
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   inactiveTabText: {
-    color: '#6B7280',
+    color: secondaryForegroundColor,
     fontSize: 14,
     fontWeight: '500',
   },
@@ -174,14 +174,14 @@ const styles = StyleSheet.create({
     left: -4,
   },
   bestDealText: {
-    color: 'white',
+    color: foregroundColorDark,
     fontSize: 10,
     fontWeight: '600',
   },
   partnerName: {
     fontSize: 14,
     fontWeight: '600',
-    color: '#1F2937',
+    color: foregroundColorLight,
     marginBottom: 2,
   },
   partnerPriceContainer: {
@@ -195,6 +195,6 @@ const styles = StyleSheet.create({
   },
   partnerPrice: {
     fontSize: 12,
-    color: '#6B7280',
+    color: primaryColorLight,
   },
 });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { DatePickerModal } from '../modals';
+import { errorForegroundColor, foregroundColorDark, foregroundColorLight, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 
 interface DateSelectorProps {
   label: string;
@@ -65,7 +66,7 @@ export const DateSelector: React.FC<DateSelectorProps> = ({
         <Text style={[styles.dateText, !value && styles.placeholderText]}>
           {value || placeholder}
         </Text>
-        <Ionicons name="calendar-outline" size={20} color="#9CA3AF" />
+        <Ionicons name="calendar-outline" size={20} color={secondaryForegroundColor} />
       </TouchableOpacity>
       {error && (
         <Text style={styles.errorText}>{error}</Text>
@@ -87,7 +88,7 @@ export const DateSelector: React.FC<DateSelectorProps> = ({
 const styles = StyleSheet.create({
   fieldLabel: {
     fontSize: 16,
-    color: '#6B7280',
+    color: foregroundColorLight,
     marginBottom: 8,
     fontWeight: '500',
   },
@@ -95,25 +96,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: foregroundColorDark,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: tertiaryForegroundColor,
   },
   dateText: {
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     fontWeight: '500',
   },
   placeholderText: {
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     fontWeight: '400',
   },
   errorText: {
     fontSize: 14,
-    color: '#EF4444',
+    color: errorForegroundColor,
     marginTop: 8,
     marginLeft: 0,
   },

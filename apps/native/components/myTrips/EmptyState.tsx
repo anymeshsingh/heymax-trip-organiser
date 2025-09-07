@@ -1,3 +1,4 @@
+import { foregroundColorLight, secondaryForegroundColor } from '@repo/ui/appColors';
 import React from 'react';
 import { View, Text, Image, StyleSheet } from 'react-native';
 
@@ -46,12 +47,12 @@ const styles = StyleSheet.create({
   emptyTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
     marginBottom: 12,
   },
   emptyDescription: {
     fontSize: 16,
-    color: '#6B7280',
+    color: secondaryForegroundColor,
     textAlign: 'center',
     lineHeight: 22,
   },

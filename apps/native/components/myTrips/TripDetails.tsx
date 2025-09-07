@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Trip } from '@repo/model/trip.model';
-import { primaryColorLight } from '@repo/ui/appColors';
+import { foregroundColorLight, primaryColorLight, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 import { TripMenuModal } from '../modals/TripMenuModal';
 
 interface TripDetailsProps {
@@ -106,7 +106,7 @@ export const TripDetails: React.FC<TripDetailsProps> = ({
             <Text style={styles.boldText}>{departure} to {arrival}</Text>
           </View>
           <TouchableOpacity style={styles.menuButton} onPress={handleMenuPress}>
-            <Ionicons name="ellipsis-vertical" size={20} color="#9CA3AF" />
+            <Ionicons name="ellipsis-vertical" size={20} color={secondaryForegroundColor} />
           </TouchableOpacity>
         </View>
 
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   },
   boldText: {
     fontSize: 14,
-    color: '#1F2937',
+    color: foregroundColorLight,
     fontWeight: '500',
   },
   menuButton: {
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   timeText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
   },
   durationLine: {
     flex: 1,
@@ -206,11 +206,11 @@ const styles = StyleSheet.create({
   line: {
     flex: 1,
     height: 1,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: tertiaryForegroundColor,
   },
   durationText: {
     fontSize: 14,
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     paddingHorizontal: 8,
   },
   nextDayIndicator: {
@@ -222,11 +222,11 @@ const styles = StyleSheet.create({
   },
   secondaryText: {
     fontSize: 14,
-    color: '#6B7280',
+    color: secondaryForegroundColor,
   },
   mutedText: {
     fontSize: 14,
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     fontStyle: 'italic',
     marginBottom: 0,
   },
@@ -240,6 +240,6 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   placeholderTime: {
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
   },
 });

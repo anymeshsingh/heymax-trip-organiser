@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Trip } from '@repo/model/trip.model';
-import { primaryColorDark } from '@repo/ui/appColors';
+import { foregroundColorDark, foregroundColorLight, primaryColorDark, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 import { AdvertisementCard } from './AdvertisementCard';
 import { TripDetails } from './TripDetails';
 
@@ -95,11 +95,13 @@ export const TripCard: React.FC<TripCardProps> = ({
       {/* Content with left padding for timeline */}
       <View style={styles.contentWrapper}>
         {/* Header with days until/since trip */}
-        {daysDifference !== null && daysDifference !== 0 && (
+        {daysDifference !== null && (
           <View style={styles.header}>
             <View style={styles.daysContainer}>
               <Text style={styles.daysText}>
-                {daysDifference > 0 
+                {daysDifference === 0 
+                  ? 'Today'
+                  : daysDifference > 0 
                   ? `In ${daysDifference} days` 
                   : `${Math.abs(daysDifference)} days ago`}
               </Text>
@@ -135,7 +137,7 @@ const styles = StyleSheet.create({
     top: 30,
     bottom: 30,
     width: 2,
-    backgroundColor: '#E5E7EB',
+    backgroundColor: tertiaryForegroundColor,
   },
   timelineDot: {
     position: 'absolute',
@@ -168,7 +170,7 @@ const styles = StyleSheet.create({
     backgroundColor: primaryColorDark,
   },
   inactiveDot: {
-    backgroundColor: '#9CA3AF',
+    backgroundColor: secondaryForegroundColor,
   },
   contentWrapper: {
     paddingLeft: 20,
@@ -184,11 +186,11 @@ const styles = StyleSheet.create({
   daysText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
   },
   dateText: {
     fontSize: 14,
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     marginTop: 2,
   },
 });

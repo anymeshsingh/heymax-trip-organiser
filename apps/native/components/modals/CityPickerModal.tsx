@@ -1,6 +1,7 @@
 import React from 'react';
 import { Modal, View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { foregroundColorLight, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 
 const SOUTHEAST_ASIAN_CITIES = [
   { code: 'SIN', city: 'Singapore', name: 'Singapore, SIN' },
@@ -61,7 +62,7 @@ export const CityPickerModal: React.FC<CityPickerModalProps> = ({
               style={styles.modalCloseButton}
               onPress={onClose}
             >
-              <Ionicons name="close" size={24} color="#1F2937" />
+              <Ionicons name="close" size={24} color={foregroundColorLight} />
             </TouchableOpacity>
           </View>
           <FlatList
@@ -96,12 +97,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
     paddingVertical: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
+    borderBottomColor: tertiaryForegroundColor,
   },
   modalTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
   },
   modalCloseButton: {
     width: 32,
@@ -115,11 +116,11 @@ const styles = StyleSheet.create({
   cityPickerItem: {
     paddingVertical: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F3F4F6',
+    borderBottomColor: tertiaryForegroundColor,
   },
   cityPickerItemText: {
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     fontWeight: '500',
   },
 });

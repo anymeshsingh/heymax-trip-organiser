@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, Modal, TouchableOpacity, StyleSheet, ScrollView, Image, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { primaryColorLight, primaryColorDark } from '@repo/ui/appColors';
+import { primaryColorLight, primaryColorDark, errorForegroundColor, foregroundColorLight, foregroundColorDark } from '@repo/ui/appColors';
 import { PrimaryButton } from '@repo/ui/primaryButton.native';
 
 interface TermsModalProps {
@@ -31,7 +31,7 @@ export const TermsModal: React.FC<TermsModalProps> = ({
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Terms & Exclusions</Text>
           <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-            <Ionicons name="close" size={24} color="#1F2937" />
+            <Ionicons name="close" size={24} color={foregroundColorLight} />
           </TouchableOpacity>
         </View>
 
@@ -63,21 +63,21 @@ export const TermsModal: React.FC<TermsModalProps> = ({
             
             <View style={styles.exclusionItem}>
               <View style={styles.exclusionIcon}>
-                <Ionicons name="alert-circle" size={20} color="#EF4444" />
+                <Ionicons name="alert-circle" size={20} color={errorForegroundColor} />
               </View>
               <Text style={styles.exclusionText}>Max Miles are excluded for taxes ???</Text>
             </View>
 
             <View style={styles.exclusionItem}>
               <View style={styles.exclusionIcon}>
-                <Ionicons name="alert-circle" size={20} color="#EF4444" />
+                <Ionicons name="alert-circle" size={20} color={errorForegroundColor} />
               </View>
               <Text style={styles.exclusionText}>Booking activities excluded</Text>
             </View>
 
             <View style={styles.exclusionItem}>
               <View style={styles.exclusionIcon}>
-                <Ionicons name="alert-circle" size={20} color="#EF4444" />
+                <Ionicons name="alert-circle" size={20} color={errorForegroundColor} />
               </View>
               <Text style={styles.exclusionText}>Travel insurance excluded</Text>
             </View>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
   headerTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
   },
   closeButton: {
     padding: 4,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   partnerName: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
     marginBottom: 4,
   },
   partnerRewardContainer: {
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
     marginBottom: 16,
   },
   exclusionItem: {
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
   },
   exclusionText: {
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     flex: 1,
   },
   termsList: {
@@ -225,13 +225,13 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 3,
-    backgroundColor: '#6B7280',
+    backgroundColor: foregroundColorLight,
     marginTop: 8,
     marginRight: 12,
   },
   termText: {
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     lineHeight: 24,
     flex: 1,
   },

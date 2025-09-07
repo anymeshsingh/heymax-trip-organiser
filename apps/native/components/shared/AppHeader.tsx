@@ -6,6 +6,7 @@ import { router } from 'expo-router';
 
 interface AppHeaderProps {
   title: string;
+  showBackButton?: boolean,
   onBackPress?: () => void;
   rightAction?: {
     icon: keyof typeof Ionicons.glyphMap;
@@ -15,6 +16,7 @@ interface AppHeaderProps {
 
 export const AppHeader: React.FC<AppHeaderProps> = ({
   title,
+  showBackButton = true,
   onBackPress,
   rightAction,
 }) => {
@@ -28,12 +30,16 @@ export const AppHeader: React.FC<AppHeaderProps> = ({
 
   return (
     <View style={styles.header}>
-      <TouchableOpacity 
-        style={styles.backButton}
-        onPress={handleBackPress}
-      >
-        <Ionicons name="arrow-back" size={24} color={foregroundColorDark} />
-      </TouchableOpacity>
+      {showBackButton ? (
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={handleBackPress}
+        >
+          <Ionicons name="arrow-back" size={24} color={foregroundColorDark} />
+        </TouchableOpacity>
+      ) : (
+        <View style={styles.backButton} />
+      )}
       <Text style={styles.headerTitle}>{title}</Text>
       {rightAction ? (
         <TouchableOpacity 

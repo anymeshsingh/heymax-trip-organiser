@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { TimePickerModal } from '../modals';
+import { errorBackgroundColor, foregroundColorDark, foregroundColorLight, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 
 interface TimeSelectorProps {
   label: string;
@@ -65,7 +66,7 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
         <Text style={[styles.timeText, !value && styles.placeholderText]}>
           {value || placeholder}
         </Text>
-        <Ionicons name="chevron-down" size={20} color="#9CA3AF" />
+        <Ionicons name="chevron-down" size={20} color={secondaryForegroundColor} />
       </TouchableOpacity>
       {error && (
         <Text style={styles.errorText}>{error}</Text>
@@ -87,7 +88,7 @@ export const TimeSelector: React.FC<TimeSelectorProps> = ({
 const styles = StyleSheet.create({
   fieldLabel: {
     fontSize: 16,
-    color: '#6B7280',
+    color: foregroundColorLight,
     marginBottom: 8,
     fontWeight: '500',
   },
@@ -95,25 +96,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#F9FAFB',
+    backgroundColor: foregroundColorDark,
     borderRadius: 12,
     paddingHorizontal: 16,
     paddingVertical: 12,
     borderWidth: 1,
-    borderColor: '#E5E7EB',
+    borderColor: tertiaryForegroundColor,
   },
   timeText: {
     fontSize: 16,
-    color: '#1F2937',
+    color: foregroundColorLight,
     fontWeight: '500',
   },
   placeholderText: {
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     fontWeight: '400',
   },
   errorText: {
     fontSize: 14,
-    color: '#EF4444',
+    color: errorBackgroundColor,
     marginTop: 8,
     marginLeft: 0,
   },

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { CityPickerModal } from '../modals';
+import { errorForegroundColor, foregroundColorDark, foregroundColorLight, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 
 interface CitySelectorProps {
   label: string;
@@ -39,7 +40,7 @@ export const CitySelector: React.FC<CitySelectorProps> = ({
         <Text style={[styles.cityText, !value && styles.placeholderCityText]}>
           {value || placeholder}
         </Text>
-        <Ionicons name="chevron-down" size={20} color="#9CA3AF" style={styles.chevronIcon} />
+        <Ionicons name="chevron-down" size={20} color={tertiaryForegroundColor} style={styles.chevronIcon} />
       </TouchableOpacity>
       {error && (
         <Text style={styles.errorText}>{error}</Text>
@@ -62,7 +63,7 @@ const styles = StyleSheet.create({
   },
   fieldLabel: {
     fontSize: 16,
-    color: '#6B7280',
+    color: foregroundColorLight,
     marginBottom: 8,
     fontWeight: '500',
   },
@@ -75,12 +76,12 @@ const styles = StyleSheet.create({
   cityText: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: foregroundColorLight,
     paddingVertical: 8,
     flex: 1,
   },
   placeholderCityText: {
-    color: '#9CA3AF',
+    color: secondaryForegroundColor,
     fontWeight: '400',
   },
   chevronIcon: {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 14,
-    color: '#EF4444',
+    color: errorForegroundColor,
     marginTop: 8,
     marginLeft: 0,
   },

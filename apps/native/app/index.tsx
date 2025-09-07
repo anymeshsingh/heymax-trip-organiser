@@ -1,7 +1,8 @@
 import { Text, View, Image, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { PrimaryButton } from "@repo/ui/primaryButton.native"
-import { primaryColorDark, backgroundColorDark, foregroundColorDark, primaryColorLight } from "@repo/ui/appColors"
+import { primaryColorDark, backgroundColorDark, foregroundColorDark } from "@repo/ui/appColors"
 import { router } from "expo-router";
+import { FeatureItem } from '../components/shared';
 
 export default function Index() {
   return (
@@ -44,44 +45,26 @@ export default function Index() {
 
         {/* Features List */}
         <View style={styles.featuresList}>
-          {/* Feature 1 */}
-          <View style={styles.featureItem}>
-            <View style={[styles.featureIcon, styles.oteIcon1]}>
-              <Image style={styles.featureIconImage} source={require('@/assets/images/icons/ote-icon1.png')} />
-            </View>
-            <View style={styles.featureContent}>
-              <Text style={styles.featureTitle}>All-in-one Flight Search</Text>
-              <Text style={styles.featureDescription}>
-                The most comprehensive flight search, at par with Google Flight Search, scanning hundreds of airlines
-              </Text>
-            </View>
-          </View>
-
-          {/* Feature 2 */}
-          <View style={styles.featureItem}>
-            <View style={[styles.featureIcon, styles.oteIcon2]}>
-              <Image style={styles.featureIconImage} source={require('@/assets/images/icons/ote-icon2.png')} />
-            </View>
-            <View style={styles.featureContent}>
-              <Text style={styles.featureTitle}>Compare Cash vs Award Tickets</Text>
-              <Text style={styles.featureDescription}>
-                Gain insights on the best deals with cents/mile value, comparing award flights to cash prices
-              </Text>
-            </View>
-          </View>
-
-          {/* Feature 3 */}
-          <View style={styles.featureItem}>
-            <View style={[styles.featureIcon, styles.oteIcon3]}>
-              <Image style={styles.featureIconImage} source={require('@/assets/images/icons/ote-icon3.png')} />
-            </View>
-            <View style={styles.featureContent}>
-              <Text style={styles.featureTitle}>Make your travel rewarding</Text>
-              <Text style={styles.featureDescription}>
-                Earn miles when you book a flight ticket through HeyMax
-              </Text>
-            </View>
-          </View>
+          <FeatureItem
+            icon={require('@/assets/images/icons/ote-icon1.png')}
+            title="All-in-one Flight Search"
+            description="The most comprehensive flight search, at par with Google Flight Search, scanning hundreds of airlines"
+            iconBackgroundColor="#2262CD33"
+          />
+          
+          <FeatureItem
+            icon={require('@/assets/images/icons/ote-icon2.png')}
+            title="Compare Cash vs Award Tickets"
+            description="Gain insights on the best deals with cents/mile value, comparing award flights to cash prices"
+            iconBackgroundColor="#F59B0033"
+          />
+          
+          <FeatureItem
+            icon={require('@/assets/images/icons/ote-icon3.png')}
+            title="Make your travel rewarding"
+            description="Earn miles when you book a flight ticket through HeyMax"
+            iconBackgroundColor="#DB4C4033"
+          />
         </View>
       </ScrollView>
 
@@ -176,48 +159,6 @@ const styles = StyleSheet.create({
   },
   featuresList: {
     marginBottom: 60,
-  },
-  featureItem: {
-    flexDirection: 'row',
-    marginBottom: 32,
-  },
-  featureIcon: {
-    width: 50,
-    height: 50,
-    borderRadius: 12,
-    backgroundColor: '#4C63D2',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-    flexDirection: 'column',
-  },
-  featureIconImage: {
-    width: "65%",
-    height: undefined,
-    aspectRatio: 1,
-  },
-  oteIcon1: {
-    backgroundColor: "#2262CD33",
-  },
-  oteIcon2: {
-    backgroundColor: '#F59B0033',
-  },
-  oteIcon3: {
-    backgroundColor: '#DB4C4033',
-  },
-  featureContent: {
-    flex: 1,
-  },
-  featureTitle: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: foregroundColorDark,
-    marginBottom: 8,
-  },
-  featureDescription: {
-    fontSize: 14,
-    color: foregroundColorDark,
-    lineHeight: 20,
   },
   pageIndicators: {
     flexDirection: 'row',

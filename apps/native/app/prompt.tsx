@@ -1,9 +1,12 @@
 import { Text, View, Image, StyleSheet, ScrollView, SafeAreaView } from "react-native";
 import { PrimaryButton } from "@repo/ui/primaryButton.native"
 import { backgroundColorDark, foregroundColorDark } from "@repo/ui/appColors"
-import { router } from "expo-router";
+import { router, useNavigation } from "expo-router";
+
 
 export default function Prompt() {
+	const navigation = useNavigation();
+
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>

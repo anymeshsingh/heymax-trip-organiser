@@ -1,5 +1,5 @@
 import { Text, View, StyleSheet, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
-import { backgroundColorLight, backgroundColorDark, primaryColorLight, foregroundColorDark } from "@repo/ui/appColors";
+import { backgroundColorLight, backgroundColorDark, primaryColorLight, foregroundColorDark, errorForegroundColor } from "@repo/ui/appColors";
 import { router } from "expo-router";
 import { useState, useMemo } from 'react';
 import { TripCard, TabNavigation, EmptyState } from "@/components/myTrips";
@@ -60,7 +60,7 @@ export default function MyTrips() {
     <TripCard
       key={item.id}
       trip={item}
-      showAdvertisement={index === 0 && activeTab === 'upcoming'}
+      showAdvertisement={activeTab === 'upcoming'}
       onEditPress={() => router.push(`/createTrip?tripId=${item.id}`)}
       onDeletePress={() => handleDeleteTrip(item.id!)}
     />
@@ -98,6 +98,7 @@ export default function MyTrips() {
         {/* Header */}
         <AppHeader 
           title="My trips"
+          showBackButton={false}
           rightAction={{
             icon: "add",
             onPress: () => router.push('/createTrip')
@@ -120,7 +121,6 @@ export default function MyTrips() {
             keyExtractor={(item) => item.id!}
             ListEmptyComponent={renderEmptyState}
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={filteredTrips.length === 0 ? styles.emptyListContainer : undefined}
             removeClippedSubviews={true}
             maxToRenderPerBatch={10}
             windowSize={10}
@@ -161,11 +161,8 @@ const styles = StyleSheet.create({
   },
   errorText: {
     fontSize: 16,
-    color: '#EF4444',
+    color: errorForegroundColor,
     textAlign: 'center',
     paddingHorizontal: 24,
-  },
-  emptyListContainer: {
-    flex: 1,
-  },
+  }
 });
