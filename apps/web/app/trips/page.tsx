@@ -5,67 +5,13 @@ import { useRouter } from 'next/navigation';
 import { IoSync } from 'react-icons/io5';
 import { AppHeader } from '../../src/components/shared/AppHeader';
 import { TripCard, TabNavigation, EmptyState } from '../../src/components/myTrips';
-
-// Mock data - replace with real API calls
-const MOCK_TRIPS = [
-	{
-		id: '1',
-		departure: "Singapore, SIN",
-		arrival: "Hong Kong, HKG",
-		departureDate: "09/11/2025",
-		departureTime: "16:05",
-		arrivalDate: "09/11/2025",
-		arrivalTime: "16:05",
-		notes: "Booking reference: Booking ref: 5AJSDH"
-	},
-	{
-		id: '2',
-		departure: "Singapore, SIN",
-		arrival: "Hong Kong, HKG",
-		departureDate: "09/13/2025",
-		departureTime: "16:05",
-		arrivalDate: "09/13/2025",
-		arrivalTime: "21:10",
-		notes: "Booking reference: Booking ref: 5AJSDH"
-	},
-	{
-		id: '3',
-		departure: "Singapore, SIN",
-		arrival: "Hong Kong, HKG",
-		departureDate: "10/10/2025",
-		departureTime: "16:05",
-		arrivalDate: "10/10/2025",
-		arrivalTime: "21:10",
-		notes: "Booking reference: Booking ref: 5AJSDH"
-	},
-	{
-		id: '4',
-		departure: "Singapore, SIN",
-		arrival: "Hong Kong, HKG",
-		departureDate: "07/07/2025",
-		departureTime: "02:02",
-		arrivalDate: "07/08/2025",
-		arrivalTime: "02:02",
-		notes: "Booking reference: Booking ref: 5AJSDH"
-	},
-	{
-		id: '5',
-		departure: "Singapore, SIN",
-		arrival: "Hong Kong, HKG",
-		departureDate: "06/06/2025",
-		departureTime: "03:03",
-		arrivalDate: "06/06/2025",
-		arrivalTime: "04:10",
-		notes: "Booking reference: Booking ref: 5AJSDH"
-	}
-];
+import { useTrips, useDeleteTrip } from '../../src/apis/trips';
 
 export default function Trips() {
 	const [activeTab, setActiveTab] = useState('upcoming');
 	const router = useRouter();
-	const trips = MOCK_TRIPS;
-	const isLoading = false;
-	const isError = false;
+	const { data: trips = [], isLoading, isError, error } = useTrips();
+	const deleteTrip = useDeleteTrip();
 
 	// Filter trips based on active tab
 	const filteredTrips = useMemo(() => {
@@ -101,8 +47,7 @@ export default function Trips() {
 	}, [trips, activeTab]);
 
 	const handleDeleteTrip = (tripId: string) => {
-		console.log('Delete trip:', tripId);
-		// Implement delete functionality
+		deleteTrip.mutate(tripId);
 	};
 
 	const tabs = [
@@ -125,7 +70,7 @@ export default function Trips() {
 		return (
 			<div className="flex justify-center items-center min-h-screen bg-background-light">
 				<span className="text-base text-error-foreground text-center px-6">
-					Error loading trips: Unknown error
+					Error loading trips: {error?.message || 'Unknown error'}
 				</span>
 			</div>
 		);

@@ -20,6 +20,14 @@
     }
 
     /* Text Colors */
+    .text-primary-light {
+        color: #5046C5,
+    }
+
+    .text-primary-dark {
+        color: #802EFF,
+    }
+
     .text-foreground-light {
         color: #1A1A1A;
     }

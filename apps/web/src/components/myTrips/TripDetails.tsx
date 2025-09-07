@@ -1,17 +1,7 @@
 import { useState } from 'react';
 import { IoEllipsisVertical } from 'react-icons/io5';
 import { TripMenuModal } from '../modals/TripMenuModal';
-
-interface Trip {
-  id?: string;
-  departure: string;
-  arrival: string;
-  departureDate?: string;
-  departureTime?: string;
-  arrivalDate?: string;
-  arrivalTime?: string;
-  notes?: string;
-}
+import { Trip } from '@repo/model/trip.model'
 
 interface TripDetailsProps {
   trip: Trip;
@@ -151,9 +141,11 @@ export const TripDetails: React.FC<TripDetailsProps> = ({
 
         {/* Add Details Button for Incomplete Trips */}
         {isIncomplete && (
-          <button className="mt-4 self-center" onClick={onEditPress}>
-            <span className="text-base text-primary-light font-semibold">Add details</span>
-          </button>
+          <div className="mt-4 flex justify-center">
+            <button onClick={onEditPress}>
+              <span className="text-base text-primary-light font-semibold">Add details</span>
+            </button>
+          </div>
         )}
       </div>
 
