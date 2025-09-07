@@ -1,11 +1,11 @@
 # Trip Organiser - Turbo Monorepo
 
-A modern trip organiser application built with Turbo monorepo architecture, featuring native mobile apps (iOS/Android) and web application with shared components and state management.
+A modern trip organiser application built with Turbo monorepo architecture, featuring native mobile apps (iOS/Android) and web application/API backend with shared components and state management.
 
 ## 🛠️ Installation
 
 ### Prerequisites
-- Node.js 18+ 
+- Node.js 20+ 
 - pnpm (package manager)
 - iOS Simulator (for iOS development)
 
@@ -36,7 +36,7 @@ This project uses a **Turbo monorepo** structure with shared packages and multip
 trip-organiser/
 ├── apps/
 │   ├── native/          # Expo React Native app (iOS/Android)
-│   └── web/             # Next.js web application
+│   └── web/             # Next.js web application and API backend
 ├── packages/
 │   ├── ui/              # Shared UI components
 │   ├── api-handler/     # API utilities and React Query setup
@@ -47,6 +47,7 @@ trip-organiser/
 ## 🚀 Features
 
 - **Cross-platform**: Native iOS/Android app and responsive web application
+- **API Server**: Web application with API backend
 - **Shared Components**: Reusable UI components across platforms
 - **Form Management**: TanStack Form for robust form handling
 - **State Management**: TanStack React Query for server state
