@@ -1,6 +1,7 @@
 "use client";
 
 import { PrimaryButton } from '@repo/ui/primaryButton';
+import { FeatureItem } from '../src/components/FeatureItem';
 
 export default function Home() {
   return (
@@ -44,49 +45,31 @@ export default function Home() {
 
           {/* Features List */}
           <div className="mb-15">
-            {/* Feature 1 */}
-            <div className="flex flex-row mb-8">
-              <div className="w-12 h-12 rounded-xl bg-blue-500 bg-opacity-20 flex justify-center items-center mr-4">
-                <img className="w-8 h-8" src="/icons/ote-icon1.png" alt="Feature 1" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-white mb-2">All-in-one Flight Search</h3>
-                <p className="text-sm text-white leading-5">
-                  The most comprehensive flight search, at par with Google Flight Search, scanning hundreds of airlines
-                </p>
-              </div>
-            </div>
+            <FeatureItem
+              icon="/icons/ote-icon1.png"
+              title="All-in-one Flight Search"
+              description="The most comprehensive flight search, at par with Google Flight Search, scanning hundreds of airlines"
+              iconBackgroundColor="bg-blue-500 bg-opacity-20"
+            />
 
-            {/* Feature 2 */}
-            <div className="flex flex-row mb-8">
-              <div className="w-12 h-12 rounded-xl bg-orange-500 bg-opacity-20 flex justify-center items-center mr-4">
-                <img className="w-8 h-8" src="/icons/ote-icon2.png" alt="Feature 2" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-white mb-2">Compare Cash vs Award Tickets</h3>
-                <p className="text-sm text-white leading-5">
-                  Gain insights on the best deals with cents/mile value, comparing award flights to cash prices
-                </p>
-              </div>
-            </div>
+            <FeatureItem
+              icon="/icons/ote-icon2.png"
+              title="Compare Cash vs Award Tickets"
+              description="Gain insights on the best deals with cents/mile value, comparing award flights to cash prices"
+              iconBackgroundColor="bg-orange-500 bg-opacity-20"
+            />
 
-            {/* Feature 3 */}
-            <div className="flex flex-row mb-8">
-              <div className="w-12 h-12 rounded-xl bg-red-500 bg-opacity-20 flex justify-center items-center mr-4">
-                <img className="w-8 h-8" src="/icons/ote-icon3.png" alt="Feature 3" />
-              </div>
-              <div className="flex-1">
-                <h3 className="text-lg font-bold text-white mb-2">Make your travel rewarding</h3>
-                <p className="text-sm text-white leading-5">
-                  Earn miles when you book a flight ticket through HeyMax
-                </p>
-              </div>
-            </div>
+            <FeatureItem
+              icon="/icons/ote-icon3.png"
+              title="Make your travel rewarding"
+              description="Earn miles when you book a flight ticket through HeyMax"
+              iconBackgroundColor="bg-red-500 bg-opacity-20"
+            />
           </div>
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-row justify-between items-center px-2">
+        <div className="flex flex-row justify-between items-center px-2 py-10">
           {/* Page Indicators */}
           <div className="flex flex-row items-center px-5">
             <div className="w-6 h-2 rounded-full bg-blue-600 mx-1"></div>
@@ -101,6 +84,9 @@ export default function Home() {
           />
         </div>
       </div>
+      {/* temperary work around for making tailwindcss work for the primaryBurron component */}
+      <div className='bg-[#802EFF] bg-[#5046C5] text-white items-center justify-center whitespace-nowrap rounded-[25px] px-[60px] py-[14px] text-base font-semibold transition-opacity hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed hidden absolute'></div>
+      <div className='inline-flex absolute'></div>
     </div>
   );
 }
