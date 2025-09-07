@@ -1,1 +1,99 @@
 @import 'tailwindcss';
+
+@layer components {
+
+    /* Background Colors */
+    .bg-primary-light {
+        background-color: #5046C5;
+    }
+
+    .bg-primary-dark {
+        background-color: #802EFF;
+    }
+
+    .bg-background-light {
+        background-color: #F4F7FC;
+    }
+
+    .bg-background-dark {
+        background-color: #130739;
+    }
+
+    /* Text Colors */
+    .text-foreground-light {
+        color: #1A1A1A;
+    }
+
+    .text-foreground-dark {
+        color: #FFFFFF;
+    }
+
+    .text-secondary-foreground {
+        color: #9CA3AF;
+    }
+
+    .text-tertiary-foreground {
+        color: #E5E7EB;
+    }
+
+    .text-error-foreground {
+        color: #DB4C40;
+    }
+
+    /* Border Colors */
+    .border-tertiary-foreground {
+        border-color: #E5E7EB;
+    }
+
+    .border-secondary-foreground {
+        border-color: #9CA3AF;
+    }
+}
+
+@layer utilities {
+
+    /* Modal slide-up animation */
+    .animate-slide-up {
+        animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    @keyframes slideUp {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    /* Backdrop fade animation */
+    .animate-fade-in {
+        animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    /* Hide scrollbar */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        /* Internet Explorer 10+ */
+        scrollbar-width: none;
+        /* Firefox */
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+        /* Safari and Chrome */
+    }
+}

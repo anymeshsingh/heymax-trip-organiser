@@ -2,10 +2,13 @@
 
 import { PrimaryButton } from '@repo/ui/primaryButton';
 import { FeatureItem } from '../src/components/FeatureItem';
+import { useRouter } from 'next/navigation';
 
 export default function Home() {
+  const router = useRouter();
+
   return (
-    <div className="flex justify-center min-h-screen bg-gray-900">
+    <div className="flex justify-center min-h-screen bg-background-dark">
       <div className="flex flex-col w-full max-w-md min-h-screen px-2">
         <div className="flex-1 overflow-y-auto px-4 pt-10">
           
@@ -39,7 +42,7 @@ export default function Home() {
           </div>
 
           {/* Main Heading */}
-          <h1 className="text-3xl font-bold text-white text-center mb-10 leading-9">
+          <h1 className="text-3xl font-bold text-foreground-dark text-center mb-10 leading-9">
             Organise all your travels in one place
           </h1>
 
@@ -72,21 +75,21 @@ export default function Home() {
         <div className="flex flex-row justify-between items-center px-2 py-10">
           {/* Page Indicators */}
           <div className="flex flex-row items-center px-5">
-            <div className="w-6 h-2 rounded-full bg-blue-600 mx-1"></div>
-            <div className="w-2 h-2 rounded-full bg-white mx-1"></div>
+            <div className="w-6 h-2 rounded-full bg-primary-dark mx-1"></div>
+            <div className="w-2 h-2 rounded-full bg-background-light mx-1"></div>
           </div>
 
           {/* Next Button */}
           <PrimaryButton
             title="Next"
             dark={true}
-            onClick={() => console.log("Button Pressed")}
+            onClick={() => router.push('/onboarding')}
           />
         </div>
       </div>
       {/* temperary work around for making tailwindcss work for the primaryBurron component */}
-      <div className='bg-[#802EFF] bg-[#5046C5] text-white items-center justify-center whitespace-nowrap rounded-[25px] px-[60px] py-[14px] text-base font-semibold transition-opacity hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed hidden absolute'></div>
-      <div className='inline-flex absolute'></div>
+      {/* <div className='bg-[#802EFF] bg-[#5046C5] text-white items-center justify-center whitespace-nowrap rounded-[25px] px-[60px] py-[14px] text-base font-semibold transition-opacity hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed hidden absolute'></div>
+      <div className='inline-flex absolute'></div> */}
     </div>
   );
 }
