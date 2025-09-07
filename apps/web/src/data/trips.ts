@@ -1,4 +1,4 @@
-import { Trip } from '@repo/model/trip.model'
+import { Trip } from '@repo/model/Trip.model'
 
 // In-memory data store (simulating a database)
 export let trips: Trip[] = [
@@ -9,7 +9,7 @@ export let trips: Trip[] = [
     departureDate: "09/11/2025",
     departureTime: "16:05",
     arrivalDate: "09/11/2025",
-    arrivalTime: "16:05",
+    arrivalTime: "17:05",
     notes: "Booking reference: Booking ref: 5AJSDH"
   },
   {

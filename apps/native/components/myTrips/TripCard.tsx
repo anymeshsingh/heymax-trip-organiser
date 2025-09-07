@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { Trip } from '@repo/model/trip.model';
+import { Trip } from '@repo/model/Trip.model';
 import { foregroundColorDark, foregroundColorLight, primaryColorDark, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 import { AdvertisementCard } from './AdvertisementCard';
 import { TripDetails } from './TripDetails';

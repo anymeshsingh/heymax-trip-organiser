@@ -1,25 +1,47 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { IoSync } from 'react-icons/io5';
 import { revalidateLogic, useForm } from '@tanstack/react-form';
-import { z } from 'zod';
 import { AppHeader } from '../../src/components/shared/AppHeader';
 import { CitySelector } from '../../src/components/shared/CitySelector';
-import { useTrip, useCreateTrip, useUpdateTrip } from '../../src/apis/trips';
+import { useTrip, useCreateTrip, useUpdateTrip } from '@repo/api-handler/trips';
+import { TripSchema, TripFormData } from '@repo/model/Trip.schema'
 
-const tripSchema = z.object({
-	departure: z.string().min(1, 'Departure city is required'),
-	arrival: z.string().min(1, 'Arrival city is required'),
-	departureDate: z.string().min(1, 'Required'),
-	departureTime: z.string().min(1, 'Required'),
-	arrivalDate: z.string().optional(),
-	arrivalTime: z.string().optional(),
-	notes: z.string().optional(),
-});
+// Date conversion utilities
+const convertToHTMLDateFormat = (dateString?: string): string => {
+	if (!dateString) return '';
+	
+	// If already in yyyy-MM-dd format, return as is
+	if (dateString.includes('-') && dateString.length === 10) {
+		return dateString;
+	}
+	
+	// Convert MM/dd/yyyy to yyyy-MM-dd
+	if (dateString.includes('/')) {
+		const [month, day, year] = dateString.split('/');
+		if (month && day && year) {
+			return `${year}-${month.padStart(2, '0')}-${day.padStart(2, '0')}`;
+		}
+	}
+	
+	return '';
+};
 
-type TripFormData = z.infer<typeof tripSchema>;
+const convertFromHTMLDateFormat = (dateString?: string): string => {
+	if (!dateString) return '';
+	
+	// Convert yyyy-MM-dd to MM/dd/yyyy
+	if (dateString.includes('-') && dateString.length === 10) {
+		const [year, month, day] = dateString.split('-');
+		if (year && month && day) {
+			return `${month}/${day}/${year}`;
+		}
+	}
+	
+	return dateString;
+};
 
 export default function CreateTrip() {
 	const router = useRouter();
@@ -44,14 +66,21 @@ export default function CreateTrip() {
 		} as TripFormData,
 		validationLogic: revalidateLogic(),
 		validators: {
-			onDynamic: tripSchema,
+			onDynamic: TripSchema,
 		},
 		onSubmit: async ({ value }) => {
 			try {
+				// Convert dates back to MM/dd/yyyy format before submitting
+				const submitValue = {
+					...value,
+					departureDate: convertFromHTMLDateFormat(value.departureDate),
+					arrivalDate: convertFromHTMLDateFormat(value.arrivalDate),
+				};
+				
 				if (isEditMode) {
-					await updateTrip.mutateAsync({ id: tripId!, trip: value });
+					await updateTrip.mutateAsync({ id: tripId!, trip: submitValue });
 				} else {
-					await createTrip.mutateAsync(value);
+					await createTrip.mutateAsync(submitValue);
 				}
 				router.back();
 			} catch (error) {
@@ -65,9 +94,9 @@ export default function CreateTrip() {
 		if (isEditMode && existingTrip) {
 			form.setFieldValue('departure', existingTrip.departure || '');
 			form.setFieldValue('arrival', existingTrip.arrival || '');
-			form.setFieldValue('departureDate', existingTrip.departureDate || '');
+			form.setFieldValue('departureDate', convertToHTMLDateFormat(existingTrip.departureDate) || '');
 			form.setFieldValue('departureTime', existingTrip.departureTime || '');
-			form.setFieldValue('arrivalDate', existingTrip.arrivalDate || '');
+			form.setFieldValue('arrivalDate', convertToHTMLDateFormat(existingTrip.arrivalDate) || '');
 			form.setFieldValue('arrivalTime', existingTrip.arrivalTime || '');
 			form.setFieldValue('notes', existingTrip.notes || '');
 		}
@@ -113,7 +142,7 @@ export default function CreateTrip() {
 							name="departure"
 							validators={{
 								onChange: ({ value }) => {
-									const result = tripSchema.shape.departure.safeParse(value);
+									const result = TripSchema.shape.departure.safeParse(value);
 									return result.success
 										? undefined
 										: result.error.issues[0]?.message;
@@ -143,7 +172,9 @@ export default function CreateTrip() {
 									name="departureDate"
 									validators={{
 										onChange: ({ value }) => {
-											const result = tripSchema.shape.departureDate.safeParse(value);
+											// Validate the converted date format
+											const convertedValue = convertFromHTMLDateFormat(value);
+											const result = TripSchema.shape.departureDate.safeParse(convertedValue);
 											return result.success
 												? undefined
 												: result.error.issues[0]?.message;
@@ -181,7 +212,7 @@ export default function CreateTrip() {
 									name="departureTime"
 									validators={{
 										onChange: ({ value }) => {
-											const result = tripSchema.shape.departureTime.safeParse(value);
+											const result = TripSchema.shape.departureTime.safeParse(value);
 											return result.success
 												? undefined
 												: result.error.issues[0]?.message;
@@ -220,7 +251,7 @@ export default function CreateTrip() {
 							name="arrival"
 							validators={{
 								onChange: ({ value }) => {
-									const result = tripSchema.shape.arrival.safeParse(value);
+									const result = TripSchema.shape.arrival.safeParse(value);
 									return result.success
 										? undefined
 										: result.error.issues[0]?.message;

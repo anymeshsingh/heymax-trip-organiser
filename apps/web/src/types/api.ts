@@ -1,5 +1,5 @@
-import { Trip } from '@repo/model/trip.model'
-import { ApiResponse } from '@repo/model/apiResponse.model'
+import { Trip } from '@repo/model/Trip.model'
+import { ApiResponse } from '@repo/model/ApiResponse.model'
 
 export interface TripsResponse extends ApiResponse<Trip[]> {}
 

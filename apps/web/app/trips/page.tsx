@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import { IoSync } from 'react-icons/io5';
 import { AppHeader } from '../../src/components/shared/AppHeader';
 import { TripCard, TabNavigation, EmptyState } from '../../src/components/myTrips';
-import { useTrips, useDeleteTrip } from '../../src/apis/trips';
+import { useTrips, useDeleteTrip } from '@repo/api-handler/trips';
 
 export default function Trips() {
 	const [activeTab, setActiveTab] = useState('upcoming');

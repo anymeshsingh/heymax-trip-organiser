@@ -3,7 +3,7 @@ import { backgroundColorLight, backgroundColorDark, primaryColorLight, foregroun
 import { router } from "expo-router";
 import { useState, useMemo } from 'react';
 import { TripCard, TabNavigation, EmptyState } from "@/components/myTrips";
-import { useTrips, useDeleteTrip } from '../src/apis/trips';
+import { useTrips, useDeleteTrip } from '@repo/api-handler/trips';
 import { AppHeader } from '../components/shared';
 
 export default function MyTrips() {

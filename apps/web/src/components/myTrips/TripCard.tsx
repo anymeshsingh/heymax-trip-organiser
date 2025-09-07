@@ -1,6 +1,6 @@
 import { TripDetails } from './TripDetails';
 import { AdvertisementCard } from './AdvertisementCard';
-import { Trip } from '@repo/model/trip.model'
+import { Trip } from '@repo/model/Trip.model'
 
 interface TripCardProps {
   trip: Trip;

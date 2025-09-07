@@ -2,24 +2,12 @@ import { Text, View, StyleSheet, SafeAreaView, TextInput, ScrollView, ActivityIn
 import { primaryColorLight, backgroundColorDark, foregroundColorDark, backgroundColorLight, secondaryForegroundColor, foregroundColorLight, tertiaryForegroundColor } from "@repo/ui/appColors";
 import { router, useLocalSearchParams } from "expo-router";
 import { revalidateLogic, useForm } from '@tanstack/react-form';
-import { z } from 'zod';
 import { useEffect } from 'react';
 import { PrimaryButton } from "@repo/ui/primaryButton.native";
 import { CitySelector, DateSelector, TimeSelector } from '../components/createTrip';
-import { useTrip, useCreateTrip, useUpdateTrip } from '../src/apis/trips';
+import { useTrip, useCreateTrip, useUpdateTrip } from '@repo/api-handler/trips';
 import { AppHeader } from '../components/shared';
-
-const tripSchema = z.object({
-  departure: z.string().min(1, 'Departure city is required'),
-  arrival: z.string().min(1, 'Arrival city is required'),
-  departureDate: z.string().min(1, 'Required'),
-  departureTime: z.string().min(1, 'Required'),
-  arrivalDate: z.string().optional(),
-  arrivalTime: z.string().optional(),
-  notes: z.string().optional(),
-});
-
-type TripFormData = z.infer<typeof tripSchema>;
+import { TripSchema, TripFormData } from '@repo/model/Trip.schema'
 
 export default function CreateTrip() {
   const params = useLocalSearchParams();
@@ -43,7 +31,7 @@ export default function CreateTrip() {
     } as TripFormData,
     validationLogic: revalidateLogic(),
     validators: {
-      onDynamic: tripSchema,
+      onDynamic: TripSchema,
     },
     onSubmit: async ({ value }) => {
       try {
@@ -98,7 +86,7 @@ export default function CreateTrip() {
               name="departure"
               validators={{
                 onChange: ({ value }) => {
-                  const result = tripSchema.shape.departure.safeParse(value);
+                  const result = TripSchema.shape.departure.safeParse(value);
                   return result.success ? undefined : result.error.issues[0]?.message;
                 },
               }}
@@ -126,7 +114,7 @@ export default function CreateTrip() {
                   name="departureDate"
                   validators={{
                     onChange: ({ value }) => {
-                      const result = tripSchema.shape.departureDate.safeParse(value);
+                      const result = TripSchema.shape.departureDate.safeParse(value);
                       return result.success ? undefined : result.error.issues[0]?.message;
                     },
                   }}
@@ -148,7 +136,7 @@ export default function CreateTrip() {
                   name="departureTime"
                   validators={{
                     onChange: ({ value }) => {
-                      const result = tripSchema.shape.departureTime.safeParse(value);
+                      const result = TripSchema.shape.departureTime.safeParse(value);
                       return result.success ? undefined : result.error.issues[0]?.message;
                     },
                   }}
@@ -171,7 +159,7 @@ export default function CreateTrip() {
               name="arrival"
               validators={{
                 onChange: ({ value }) => {
-                  const result = tripSchema.shape.arrival.safeParse(value);
+                  const result = TripSchema.shape.arrival.safeParse(value);
                   return result.success ? undefined : result.error.issues[0]?.message;
                 },
               }}

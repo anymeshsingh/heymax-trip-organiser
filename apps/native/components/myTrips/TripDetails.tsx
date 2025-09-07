@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Trip } from '@repo/model/trip.model';
+import { Trip } from '@repo/model/Trip.model';
 import { foregroundColorLight, primaryColorLight, secondaryForegroundColor, tertiaryForegroundColor } from '@repo/ui/appColors';
 import { TripMenuModal } from '../modals/TripMenuModal';
 

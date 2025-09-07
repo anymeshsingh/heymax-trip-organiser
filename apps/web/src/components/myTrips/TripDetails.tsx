@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { IoEllipsisVertical } from 'react-icons/io5';
 import { TripMenuModal } from '../modals/TripMenuModal';
-import { Trip } from '@repo/model/trip.model'
+import { Trip } from '@repo/model/Trip.model'
 
 interface TripDetailsProps {
   trip: Trip;
