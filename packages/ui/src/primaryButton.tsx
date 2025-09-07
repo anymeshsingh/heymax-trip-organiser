@@ -1,58 +1,42 @@
 "use client";
 
-import { primaryColorDark, foregroundColorDark, primaryColorLight, foregroundColorLight } from './appColors';
+import { cva, type VariantProps } from "class-variance-authority";
+import { cn } from "./utils";
 
-interface PrimaryButtonProps {
+const buttonVariants = cva(
+  "inline-flex items-center justify-center whitespace-nowrap rounded-[25px] px-[60px] py-[14px] text-base font-semibold transition-opacity hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed",
+  {
+    variants: {
+      variant: {
+        light: "bg-[#5046C5] text-white",
+        dark: "bg-[#802EFF] text-white",
+      },
+    },
+    defaultVariants: {
+      variant: "light",
+    },
+  }
+);
+
+interface PrimaryButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
   title: string;
-  onClick?: () => void;
-  style?: React.CSSProperties;
-  className?: string;
-  disabled?: boolean;
-  dark: boolean;
+  dark?: boolean;
 }
 
 export const PrimaryButton = ({
   title,
-  onClick,
-  style,
-  className = "",
-  disabled = false,
   dark = false,
+  className,
+  disabled = false,
+  ...props
 }: PrimaryButtonProps) => {
-  const buttonStyle: React.CSSProperties = {
-    backgroundColor: dark ? primaryColorDark : primaryColorLight,
-    color: dark ? foregroundColorDark : foregroundColorLight,
-    paddingTop: '14px',
-    paddingBottom: '14px',
-    paddingLeft: '60px',
-    paddingRight: '60px',
-    borderRadius: '25px',
-    marginRight: '20px',
-    marginBottom: '20px',
-    fontSize: '16px',
-    fontWeight: '600',
-    textAlign: 'center',
-    border: 'none',
-    cursor: 'pointer',
-    transition: 'opacity 0.2s',
-    ...style,
-  };
-
   return (
     <button
-      type="button"
-      className={className}
-      style={buttonStyle}
-      onClick={onClick}
+      className={cn(buttonVariants({ variant: dark ? "dark" : "light" }), className)}
       disabled={disabled}
-      onMouseEnter={(e) => {
-        if (!disabled) {
-          e.currentTarget.style.opacity = '0.8';
-        }
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.opacity = '1';
-      }}
+      {...props}
     >
       {title}
     </button>
